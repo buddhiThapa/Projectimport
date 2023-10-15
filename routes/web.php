@@ -21,15 +21,22 @@ use Illuminate\Support\Facades\Route;
 //     ]);
 // });
 
-Route::get('/',[boss::class,'Chartsheet']);
-Route::get('/getAmazonData',[boss::class,'getAmazonData']);
-Route::get('/import',[boss::class,'importView'])->name('importfile');
-Route::post('/import',[boss::class,'import']);
+Route::group(['middleware' => ['auth']], function() {
 
-//credit note
+    Route::get('/logout',[boss::class,'logout']);
 
-Route::get('/credit_note',[boss::class,'credit_note']);
-Route::get('/dedit_note',[boss::class,'dedit_note']);
+    Route::get('/',[boss::class,'Chartsheet']);
+    Route::get('/getAmazonData',[boss::class,'getAmazonData']);
+    Route::get('/import',[boss::class,'importView'])->name('importfile');
+    Route::post('/import',[boss::class,'import']);
+    
+    //credit note
+    
+    Route::get('/credit_note',[boss::class,'credit_note']);
+    Route::get('/dedit_note',[boss::class,'dedit_note']);
+});
+Route::get('/login',[boss::class,'login'])->name('login');
+Route::post('/login',[boss::class,'Authenticate']);
 
 
 

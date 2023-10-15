@@ -8,6 +8,8 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Imports\AmazonImport;
 use Maatwebsite\Excel\HeadingRowImport;
 use Session;
+use Hash;
+use Auth;
 
 class boss extends Controller
 {
@@ -87,13 +89,14 @@ class boss extends Controller
                     $import->import($file);
     
                     if ($import->failures()->isNotEmpty()) {
-                        dd($import->failures());
+                       
                         return back()->withFailures($import->failures());
                     }
                     if(!empty(Session::get('error_srTar'))){
                         return redirect()->back()->with('error', 'Error occured please check.');
                     }
-                    return back()->withStatus('data imported successfully.');
+                    
+                    return redirect()->back()->with('success','Data imported successfully.');
     
                 }else{
                     return redirect()->back()->with('error', 'Invalid template.');
@@ -130,5 +133,35 @@ class boss extends Controller
         $gst_percentage = collect($gst_percentage)->toArray();
         return view('dedit_note',compact('state','gst_percentage','payment_mode','vendor','customer_type'));
         
+    }
+
+    function login(){
+        return view('login');
+    }
+
+    function Authenticate(request $request){
+        // dd($request->all());
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+            // 'password'=>'required|digits:10',
+        ]);
+        $email = $request->input('email');
+        $password =$request->input('password');
+
+        if(Auth::attempt(['email'=>$email,'password'=>$password])){
+            return redirect('/');
+        }
+
+        return redirect()->back()->with('error','credential not match');
+
+    }
+
+    function logout(){
+        // Auth::logout();
+        if(Auth::logout()){
+            return redirect('login')->with('success','Logout Successfully');
+        }
+        return redirect()->back()->with('error','Somthing went wrong');
     }
 }

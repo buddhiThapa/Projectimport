@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('customer_type',100)->nullable();
             $table->string('gst_percentage',100)->nullable();
             $table->string('payment_mode',100)->nullable();
-            
-
+            $table->string('total_sale',100)->nullable();
+            $table->string('credit_note',100)->nullable();
+            $table->string('debit_note',100)->nullable();
             $table->timestamps();
         });
     }

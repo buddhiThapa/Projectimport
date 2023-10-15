@@ -42,14 +42,17 @@ class AmazonImport implements ToCollection, WithHeadingRow, WithValidation, Skip
             $insert = DB::table('amazon_datas')->insert(
                 [
                     'order_id' => $value['order_id'],
-                    'order_date' => $value['order_date'],
+                    'order_date' => @date('Y-m-d',strtotime($value['order_date'])),
                     'ship_to_state' => $value['ship_to_state'],
+                    'total_sale' => $value['principal_amount'],
                     'gst_percentage' => $value['sgst_tax'],
                     'payment_mode' => $value['payment_method_code'],
                     'vendor' => $vendor,
                     'customer_type' => @$value['customer_type'],
+                    'credit_note' => $value['credit_note_no'],
+                    'debit_note' => $value['debit_note'],
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ]
             );
 
@@ -59,7 +62,10 @@ class AmazonImport implements ToCollection, WithHeadingRow, WithValidation, Skip
                     'order_date' => $value['order_date'],
                     'ship_to_state' => $value['ship_to_state'],
                     'gst_percentage' => $value['sgst_tax'],
-                    'payment_mode' => $value['payment_method_code']
+                    'payment_mode' => $value['payment_method_code'],
+                    'total_sale' => $value['principal_amount'],
+                    'credit_note' => $value['credit_note_no'],
+                    'debit_note' => $value['debit_note']
                 ];
             }
             // return redirect()->to()->with('success','Data Imported successfully');
