@@ -43,7 +43,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Total sale</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Credit Note</h1>
                               
                     
                         <div class="row">
@@ -114,8 +114,8 @@
                     
                     <div class="col-12 mt-4">  
                 
-                        <table class="table table-primary text-dark table-bordered table-striped" id='data_table' >
-                          <thead >
+                        <table class="table table-active text-dark table-bordered table-striped" id='data_table' >
+                          <thead>
                             <tr>
                               {{-- <th>Vendor name</th> --}}
                               <th >Sn no</th>

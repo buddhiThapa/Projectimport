@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_id',100)->nullable();
             $table->date('order_date')->nullable();
-            $table->string('bill_from_state',100)->nullable();
+            $table->string('ship_to_state',100)->nullable();
             $table->string('vendor',100)->nullable();
             $table->string('customer_type',100)->nullable();
             $table->string('gst_percentage',100)->nullable();

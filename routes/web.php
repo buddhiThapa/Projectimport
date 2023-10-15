@@ -26,6 +26,12 @@ Route::get('/getAmazonData',[boss::class,'getAmazonData']);
 Route::get('/import',[boss::class,'importView'])->name('importfile');
 Route::post('/import',[boss::class,'import']);
 
+//credit note
+
+Route::get('/credit_note',[boss::class,'credit_note']);
+Route::get('/dedit_note',[boss::class,'dedit_note']);
+
+
 
 
 
